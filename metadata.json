@@ -1,0 +1,8 @@
+{
+  "name": "unica app",
+  "description": "Una simulación de red descentralizada con recompensas reales y asistente IA.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

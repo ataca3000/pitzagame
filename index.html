@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Pitzza Planet: The Crystal Gateway.">
+    
+    <!-- PWA Settings -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PitzzaPlanet">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <title>Pitzza Planet</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Orbitron', 'sans-serif'],
+              elegant: ['Outfit', 'sans-serif'],
+            },
+            colors: {
+              space: '#020617',
+              surface: '#0A1120',
+              neon: {
+                pink: '#FF00FF',
+                cyan: '#00FFFF',
+                green: '#39FF14',
+                orange: '#FF5F1F',
+                blue: '#00C2FF'
+              }
+            },
+            animation: {
+              'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'spin-slow': 'spin 20s linear infinite',
+              'nebula-shift': 'nebulaShift 20s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-15px)' },
+              },
+              nebulaShift: {
+                '0%': { transform: 'scale(1) translate(0, 0)' },
+                '100%': { transform: 'scale(1.2) translate(5%, 5%)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --glass-bg: rgba(10, 17, 32, 0.7);
+      }
+
+      body {
+        background-color: #020617;
+        color: #e2e8f0;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Manrope', sans-serif;
+      }
+
+      /* MOTOR DE FONDO: NEBULOSA DE CRISTAL */
+      .crystal-background {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: #020617;
+        overflow: hidden;
+      }
+
+      .nebula-layer {
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        top: -25%;
+        left: -25%;
+        filter: blur(100px);
+        opacity: 0.5;
+        background: 
+          radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 40%),
+          radial-gradient(circle at 80% 20%, #431407 0%, transparent 35%),
+          radial-gradient(circle at 40% 80%, #064e3b 0%, transparent 40%),
+          radial-gradient(circle at 70% 70%, #1e3a8a 0%, transparent 40%);
+        animation: nebula-shift 30s ease-in-out infinite alternate;
+      }
+
+      /* GRANO DE CRISTAL (NOISE) */
+      .glass-grain {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.15;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* OVERLAY DE ESTRELLAS CRISTALINAS */
+      .star-field {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image: 
+          radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1.5px 1.5px at 40px 70px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1.5px 1.5px at 90px 40px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 160px 120px, #fff, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        opacity: 0.1;
+        animation: stars 100s linear infinite;
+      }
+
+      @keyframes stars {
+        from { background-position: 0 0; }
+        to { background-position: 0 1000px; }
+      }
+
+      /* EFECTO DE VIDRIO PRISMÁTICO */
+      .neon-glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        box-shadow: 
+          0 8px 32px 0 rgba(0, 0, 0, 0.8),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      }
+
+      /* BORDES DE CRISTAL (REFLECTIVE) */
+      .crystal-edge {
+        position: relative;
+      }
+      .crystal-edge::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 40%, transparent 60%, rgba(0,255,255,0.1) 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* HEADER DE CRISTAL PARA DASHBOARD */
+      .crystal-header {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        border-bottom-left-radius: 60px;
+        border-bottom-right-radius: 60px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      }
+      .crystal-header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        filter: brightness(0.4) saturate(1.2);
+      }
+      .crystal-header .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, #020617 0%, rgba(2,6,23,0.4) 50%, transparent 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 40px;
+      }
+
+      /* PARTICULAS DE CLICK */
+      .click-particle {
+          position: fixed;
+          width: 8px;
+          height: 8px;
+          background: #00ffff;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9999;
+          box-shadow: 0 0 10px #00ffff;
+          animation: pop 0.6s ease-out forwards;
+      }
+      @keyframes pop {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(4); opacity: 0; }
+      }
+
+      /* SCROLLBAR CUSTOM */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(0, 255, 255, 0.2); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 255, 0.4); }
+
+      /* EFECTO DE TEXTO NEON */
+      .text-shadow-neon {
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+      }
+
+      .theme-girl .nebula-layer {
+        background: 
+          radial-gradient(circle at 20% 30%, #fce7f3 0%, transparent 40%),
+          radial-gradient(circle at 80% 20%, #fee2e2 0%, transparent 35%),
+          radial-gradient(circle at 40% 80%, #fef3c7 0%, transparent 40%);
+        opacity: 0.3;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <!-- MOTOR VISUAL -->
+    <div class="crystal-background">
+        <div class="nebula-layer"></div>
+        <div class="star-field"></div>
+    </div>
+    <div class="glass-grain"></div>
+
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

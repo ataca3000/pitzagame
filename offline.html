@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Desconexión del Nexo - Pitzza Planet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Manrope:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #020617; 
+            color: white; 
+            font-family: 'Manrope', sans-serif; 
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .display-font { font-family: 'Orbitron', sans-serif; }
+        .glitch {
+            position: relative;
+            text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff, 0.025em 0.04em 0 #fffc00;
+            animation: glitch 725ms infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff, 0.025em 0.04em 0 #fffc00; }
+            15% { text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff, 0.025em 0.04em 0 #fffc00; }
+            16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+            49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+            50% { text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff, 0 -0.04em 0 #fffc00; }
+            99% { text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff, 0 -0.04em 0 #fffc00; }
+            100% { text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff, -0.04em -0.05em 0 #fffc00; }
+        }
+        .nebula {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #1e1b4b 0%, transparent 70%);
+            opacity: 0.5;
+            filter: blur(80px);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="nebula"></div>
+    <div class="text-center p-8 max-w-sm">
+        <div class="mb-8 flex justify-center">
+            <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-5xl shadow-[0_0_50px_rgba(234,88,12,0.4)]">🍕</div>
+        </div>
+        <h1 class="display-font font-black text-4xl mb-4 italic tracking-tighter glitch">ERROR_CONNECTION</h1>
+        <p class="text-gray-400 text-sm mb-8 leading-relaxed uppercase font-mono tracking-widest italic">
+            El enlace con Planet Pitzza se ha fragmentado. Estás en modo de supervivencia offline.
+        </p>
+        <button onclick="window.location.reload()" class="w-full py-4 bg-white text-black font-black text-xs uppercase tracking-[0.3em] rounded-2xl hover:bg-neon-cyan transition-all shadow-xl active:scale-95">
+            REINTENTAR SINCRO
+        </button>
+        <p class="text-[9px] text-gray-600 mt-6 uppercase tracking-widest font-mono">Status: Local_Node_Running</p>
+    </div>
+</body>
+</html>

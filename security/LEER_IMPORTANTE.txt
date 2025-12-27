@@ -1,0 +1,15 @@
+
+ADVERTENCIA DE SEGURIDAD - SISTEMA NEURAL PITZZA
+
+Si estás leyendo esto descomprimiendo el APK o accediendo al código fuente:
+POR AQUÍ NO BRODER.
+
+Este sistema cuenta con mecanismos de integridad. Cualquier modificación en los archivos de la billetera o los nodos de publicidad resultará en:
+1. Bloqueo inmediato del ID de dispositivo (IMEI/Fingerprint) en nuestros servidores.
+2. Quema total de los PitzzaCoins acumulados.
+3. Reporte automático a la red de fraude publicitario de Google.
+
+El código fuente está ofuscado y vinculado a la firma digital de la Play Store.
+Juega limpio. Gana limpio.
+
+- El Arquitecto.

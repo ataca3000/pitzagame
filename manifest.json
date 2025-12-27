@@ -1,0 +1,29 @@
+
+{
+  "id": "com.pizza.freeplanet",
+  "name": "Pizza Free Planet",
+  "short_name": "FreePlanet",
+  "description": "Red descentralizada con recompensas reales y asistente IA.",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050B14",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/fluency/192/pizza.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/512/pizza.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "utilities"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
